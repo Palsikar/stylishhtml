@@ -3,8 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kathmandu Fast Food Menu</title>
+  <title>Kathmandu Fast Food Center</title>
   <style>
+    :root {
+      --primary-color: #d62828;
+      --accent-color: #f77f00;
+      --bg-color: #fff8f0;
+      --text-color: #333;
+      --button-color: #e85d04;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -13,14 +21,13 @@
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #fff8f0;
-      color: #333;
-      line-height: 1.6;
+      background-color: var(--bg-color);
+      color: var(--text-color);
       padding: 20px;
     }
 
     header {
-      background-color: #d62828;
+      background-color: var(--primary-color);
       color: white;
       padding: 30px 20px;
       text-align: center;
@@ -33,7 +40,7 @@
     }
 
     main {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 40px auto;
       background-color: #fff;
       padding: 30px;
@@ -42,29 +49,99 @@
     }
 
     h2 {
-      margin-bottom: 10px;
-      color: #d62828;
-      border-bottom: 2px solid #f77f00;
+      margin-bottom: 15px;
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--accent-color);
       padding-bottom: 5px;
+      font-size: 1.6em;
     }
 
     .menu-section {
-      margin-bottom: 30px;
+      margin-bottom: 40px;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
     }
 
     .menu-item {
+      background: #fafafa;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #eee;
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px dashed #ccc;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
     }
 
-    .menu-item:last-child {
-      border-bottom: none;
+    .menu-item:hover {
+      transform: translateY(-3px);
     }
 
-    .menu-item span {
+    .menu-title {
+      font-size: 1.1em;
       font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .menu-price {
+      color: var(--accent-color);
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .menu-item button {
+      background-color: var(--button-color);
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .menu-item button:hover {
+      background-color: #bc3908;
+    }
+
+    #cart {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      background-color: #d62828;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      display: none;
+      z-index: 10;
+    }
+
+    #cart ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    #cart ul li {
+      padding: 5px;
+      border-bottom: 1px solid white;
+    }
+
+    #cart ul li span {
+      font-weight: bold;
+    }
+
+    #cart button {
+      background-color: #e85d04;
+      padding: 10px;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
     }
 
     footer {
@@ -73,62 +150,133 @@
       color: #777;
       font-size: 14px;
     }
-
-    @media (max-width: 600px) {
-      .menu-item {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .menu-item span {
-        margin-top: 5px;
-      }
-    }
   </style>
 </head>
 <body>
 
   <header>
     <h1>Kathmandu Fast Food Center</h1>
-    <p>Delicious. Affordable. Quick.</p>
+    <p>Delicious • Affordable • Quick Bites</p>
   </header>
 
   <main>
+    <!-- Burgers -->
     <div class="menu-section">
       <h2>🍔 Burgers</h2>
-      <div class="menu-item"><div>Chicken Burger</div> <span>Rs. 180</span></div>
-      <div class="menu-item"><div>Veg Burger</div> <span>Rs. 130</span></div>
-      <div class="menu-item"><div>Cheese Burger</div> <span>Rs. 200</span></div>
+      <div class="menu-grid">
+        <div class="menu-item" data-name="Chicken Burger" data-price="180">
+          <div class="menu-title">Chicken Burger</div>
+          <div class="menu-price">Rs. 180</div>
+          <button onclick="addToCart('Chicken Burger', 180)">Add to Cart</button>
+        </div>
+        <div class="menu-item" data-name="Veg Burger" data-price="130">
+          <div class="menu-title">Veg Burger</div>
+          <div class="menu-price">Rs. 130</div>
+          <button onclick="addToCart('Veg Burger', 130)">Add to Cart</button>
+        </div>
+        <div class="menu-item" data-name="Cheese Burger" data-price="200">
+          <div class="menu-title">Cheese Burger</div>
+          <div class="menu-price">Rs. 200</div>
+          <button onclick="addToCart('Cheese Burger', 200)">Add to Cart</button>
+        </div>
+      </div>
     </div>
 
+    <!-- Momos -->
     <div class="menu-section">
       <h2>🥟 Momos</h2>
-      <div class="menu-item"><div>Buff Momos</div> <span>Rs. 120</span></div>
-      <div class="menu-item"><div>Chicken Momos</div> <span>Rs. 150</span></div>
-      <div class="menu-item"><div>Veg Momos</div> <span>Rs. 100</span></div>
-      <div class="menu-item"><div>Jhol Momos</div> <span>Rs. 160</span></div>
+      <div class="menu-grid">
+        <div class="menu-item" data-name="Buff Momos" data-price="120">
+          <div class="menu-title">Buff Momos</div>
+          <div class="menu-price">Rs. 120</div>
+          <button onclick="addToCart('Buff Momos', 120)">Add to Cart</button>
+        </div>
+        <div class="menu-item" data-name="Chicken Momos" data-price="150">
+          <div class="menu-title">Chicken Momos</div>
+          <div class="menu-price">Rs. 150</div>
+          <button onclick="addToCart('Chicken Momos', 150)">Add to Cart</button>
+        </div>
+        <div class="menu-item" data-name="Jhol Momos" data-price="160">
+          <div class="menu-title">Jhol Momos</div>
+          <div class="menu-price">Rs. 160</div>
+          <button onclick="addToCart('Jhol Momos', 160)">Add to Cart</button>
+        </div>
+      </div>
     </div>
 
+    <!-- Local Favorites -->
     <div class="menu-section">
-      <h2>🍟 Snacks</h2>
-      <div class="menu-item"><div>French Fries</div> <span>Rs. 90</span></div>
-      <div class="menu-item"><div>Spring Rolls</div> <span>Rs. 120</span></div>
-      <div class="menu-item"><div>Chowmein (Veg)</div> <span>Rs. 100</span></div>
-      <div class="menu-item"><div>Chowmein (Chicken)</div> <span>Rs. 140</span></div>
+      <h2>🍲 Nepali Specials</h2>
+      <div class="menu-grid">
+        <div class="menu-item" data-name="Chicken Manchurian" data-price="220">
+          <div class="menu-title">Chicken Manchurian</div>
+          <div class="menu-price">Rs. 220</div>
+          <button onclick="addToCart('Chicken Manchurian', 220)">Add to Cart</button>
+        </div>
+        <div class="menu-item" data-name="Thukpa" data-price="160">
+          <div class="menu-title">Thukpa (Chicken/Veg)</div>
+          <div class="menu-price">Rs. 160</div>
+          <button onclick="addToCart('Thukpa', 160)">Add to Cart</button>
+        </div>
+        <div class="menu-item" data-name="Sekuwa" data-price="200">
+          <div class="menu-title">Sekuwa (Buff/Chicken)</div>
+          <div class="menu-price">Rs. 200</div>
+          <button onclick="addToCart('Sekuwa', 200)">Add to Cart</button>
+        </div>
+      </div>
     </div>
 
-    <div class="menu-section">
-      <h2>🥤 Beverages</h2>
-      <div class="menu-item"><div>Coca-Cola / Fanta / Sprite</div> <span>Rs. 50</span></div>
-      <div class="menu-item"><div>Lassi (Sweet/Salted)</div> <span>Rs. 60</span></div>
-      <div class="menu-item"><div>Milk Tea</div> <span>Rs. 25</span></div>
-      <div class="menu-item"><div>Lemon Soda</div> <span>Rs. 40</span></div>
+    <!-- Cart Display -->
+    <div id="cart">
+      <h3>Your Cart</h3>
+      <ul id="cart-items"></ul>
+      <p><strong>Total: Rs. <span id="total-price">0</span></strong></p>
+      <button onclick="checkout()">Checkout</button>
     </div>
   </main>
 
   <footer>
-    <p>&copy; 2025 Kathmandu Fast Food Center. All rights reserved.</p>
+    <p>&copy; 2025 Kathmandu Fast Food Center | Designed with ❤️ in Nepal</p>
   </footer>
+
+  <script>
+    let cart = [];
+    let total = 0;
+
+    function addToCart(item, price) {
+      cart.push({ name: item, price: price });
+      total += price;
+      updateCartDisplay();
+    }
+
+    function updateCartDisplay() {
+      const cartItems = document.getElementById("cart-items");
+      const totalPrice = document.getElementById("total-price");
+      cartItems.innerHTML = '';
+      
+      cart.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `${item.name} - Rs. ${item.price} <button onclick="removeFromCart(${index})">Remove</button>`;
+        cartItems.appendChild(li);
+      });
+
+      totalPrice.innerText = total;
+      document.getElementById("cart").style.display = cart.length > 0 ? 'block' : 'none';
+    }
+
+    function removeFromCart(index) {
+      total -= cart[index].price;
+      cart.splice(index, 1);
+      updateCartDisplay();
+    }
+
+    function checkout() {
+      alert(`Your total is Rs. ${total}. Thank you for ordering!`);
+      cart = [];
+      total = 0;
+      updateCartDisplay();
+    }
+  </script>
 
 </body>
 </html>
