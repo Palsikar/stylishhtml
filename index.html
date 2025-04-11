@@ -1,56 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Simple Page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kathmandu Fast Food Menu</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff8f0;
+      color: #333;
+      line-height: 1.6;
       padding: 20px;
     }
 
     header {
-      background-color: #0077cc;
+      background-color: #d62828;
       color: white;
-      padding: 20px;
+      padding: 30px 20px;
       text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 2.5em;
     }
 
     main {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      max-width: 600px;
-      margin: 20px auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 900px;
+      margin: 40px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     }
 
-    button {
-      background-color: #0077cc;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
+    h2 {
+      margin-bottom: 10px;
+      color: #d62828;
+      border-bottom: 2px solid #f77f00;
+      padding-bottom: 5px;
     }
 
-    button:hover {
-      background-color: #005fa3;
+    .menu-section {
+      margin-bottom: 30px;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px dashed #ccc;
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .menu-item span {
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: #777;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .menu-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .menu-item span {
+        margin-top: 5px;
+      }
     }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>Welcome to My Page</h1>
+    <h1>Kathmandu Fast Food Center</h1>
+    <p>Delicious. Affordable. Quick.</p>
   </header>
+
   <main>
-    <p>This is a basic HTML page with some CSS styles. Click the button below to see a simple interaction.</p>
-    <button onclick="alert('Hello! Thanks for clicking.')">Click Me</button>
+    <div class="menu-section">
+      <h2>🍔 Burgers</h2>
+      <div class="menu-item"><div>Chicken Burger</div> <span>Rs. 180</span></div>
+      <div class="menu-item"><div>Veg Burger</div> <span>Rs. 130</span></div>
+      <div class="menu-item"><div>Cheese Burger</div> <span>Rs. 200</span></div>
+    </div>
+
+    <div class="menu-section">
+      <h2>🥟 Momos</h2>
+      <div class="menu-item"><div>Buff Momos</div> <span>Rs. 120</span></div>
+      <div class="menu-item"><div>Chicken Momos</div> <span>Rs. 150</span></div>
+      <div class="menu-item"><div>Veg Momos</div> <span>Rs. 100</span></div>
+      <div class="menu-item"><div>Jhol Momos</div> <span>Rs. 160</span></div>
+    </div>
+
+    <div class="menu-section">
+      <h2>🍟 Snacks</h2>
+      <div class="menu-item"><div>French Fries</div> <span>Rs. 90</span></div>
+      <div class="menu-item"><div>Spring Rolls</div> <span>Rs. 120</span></div>
+      <div class="menu-item"><div>Chowmein (Veg)</div> <span>Rs. 100</span></div>
+      <div class="menu-item"><div>Chowmein (Chicken)</div> <span>Rs. 140</span></div>
+    </div>
+
+    <div class="menu-section">
+      <h2>🥤 Beverages</h2>
+      <div class="menu-item"><div>Coca-Cola / Fanta / Sprite</div> <span>Rs. 50</span></div>
+      <div class="menu-item"><div>Lassi (Sweet/Salted)</div> <span>Rs. 60</span></div>
+      <div class="menu-item"><div>Milk Tea</div> <span>Rs. 25</span></div>
+      <div class="menu-item"><div>Lemon Soda</div> <span>Rs. 40</span></div>
+    </div>
   </main>
+
+  <footer>
+    <p>&copy; 2025 Kathmandu Fast Food Center. All rights reserved.</p>
+  </footer>
+
 </body>
 </html>
-
